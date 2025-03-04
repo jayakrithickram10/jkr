@@ -1,0 +1,21 @@
+name: sync to S3
+on:
+push:
+banches:
+-main
+jobs:
+sync:
+runs-on: ubuntu-latest
+steps:
+- name: checkout Repository
+  uses: actions?checkout@v3
+
+  - name: configure AWS Credentials
+    uses: aws-actions/configure-aws-credentialss@v2
+    with:
+    aws-access-key-id: ${{secrets.AWS_ACCESS_KEY}}
+    aws-region: eu-north-1
+
+    _ name: Sync to S3
+    run: aws s3 sync . s3://jkr10
+    
